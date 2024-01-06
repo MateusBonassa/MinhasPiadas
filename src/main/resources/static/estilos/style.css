@@ -1,0 +1,553 @@
+*{
+    font-family: Helvetica;
+}
+
+.flex-div{
+    display: flex;
+}
+
+.wid-100{
+    width: 100%;
+}
+
+.space-between {
+	justify-content: space-between;
+}
+
+/* ========= HEADER ========= */
+.nav-text-style{
+    font-size: 24px;
+    margin-right: 50px;
+    font-weight: 500;
+}
+
+.nav-text-style:hover{
+    font-weight: 600;
+    color: #000;  
+}
+
+.buttons-head{
+    margin-top: 15px;
+}
+
+/* ====X==== HEADER ====X==== */
+
+/* ========= BACKGROUND BODY ========= */
+.bg-image-login{
+    background: linear-gradient(40deg, #00ffe773, #27ff001f, #fff099c4); 
+    background-size: cover;
+    padding-top: 75px;
+    padding-bottom: 100px;
+    height: 900px;
+}
+/* ====X==== BACKGROUND BODY ====X==== */
+
+
+/* ========= FORMULARIO ========= */
+.containter-login{
+    background-color: #FFEE93;
+    margin-top: 125px;
+    height: 500px;
+    width: 550px;
+    border-radius: 45px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 50px;
+    box-shadow: 3px 3px 20px 1px #333;
+}
+.text-form{
+    color: #333;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+.text-modal{
+    color: #555;
+}
+.text-modal:hover{
+    color: #111;
+    cursor: pointer;
+}
+
+
+.tittle-login{
+    color: #333;
+    font-size: 45px;
+}
+.form-login{
+    align-items: center
+
+}
+.input-form{
+    margin-top: 0;
+    margin-bottom: 10px;
+    width: 300px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 2px solid white;
+    transition: 0.4s;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.input-form:focus{
+    outline: none;
+    border: 2px solid #d8b800;
+}
+.input-form:hover{
+    outline: none;
+    border: 2px solid #d8b800;
+}
+.btn-login{
+    background-color: #f8dd40;
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 120px;
+    font-size: 30px;
+    border: none;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+.btn-login:hover{
+    background-color: #d8b800;
+}
+
+
+.btn-reg{
+    background-color: #00ffe7;
+    margin-top: 5px;
+    border-radius: 20px;
+    width: 140px;
+    font-size: 20px;
+    border: none;
+}
+.btn-reg:hover{
+    background-color: #D8DFD4;
+}
+/* ====X==== FORMULARIO ====X==== */
+
+/* ========= TELA DE CADASTRO =========*/
+.containter-cadastro{
+    background-color: #FFEE93;
+    margin-top: 125px;
+    height: 590px;
+    width: 550px;
+    border-radius: 45px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 50px;
+    box-shadow: 3px 3px 20px 1px #333;
+}
+
+
+.btn-cad{
+    background-color: #f8dd40;
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 150px;
+    font-size: 30px;
+    border: none;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+.btn-cad:hover{
+    background-color: #d8b800;
+}
+
+/* ====X==== TELA DE CADASTRO ====X====*/
+
+/* ========= TELA HOME PIADAS =========*/
+.bg-piadas{
+    background: linear-gradient(40deg, #00ffe773, #27ff001f, #fff099c4); 
+    background-size: cover;
+    padding-top: 25px;
+    padding-bottom: 100px;
+}
+
+
+.panel-flex{
+    display: flex;
+    margin: 0 auto;
+    flex-flow: row wrap;
+}
+
+.panel-piadas-principal{
+    background-color: white;
+    margin: 30px;
+    border-radius: 20px;
+    flex: 1;
+    /*TESTE*/
+    max-height: 800px;
+    min-height: 800px;
+    /*TESTE*/
+    flex-grow: 2;
+    box-shadow: 2px 2px 20px 1px #333;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}   
+.panel-piadas-ranking{
+    background-color: white;
+    margin: 30px;
+    border-radius: 20px;
+    flex: 1;
+    /*TESTE*/
+    height: 800px;
+    /*TESTE*/
+    box-shadow: 2px 2px 20px 1px #333;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.logoPiada-jokes0{
+    color: rgb(0, 0, 0);
+}
+.logoPiada-jokes0:hover{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+.logoPiada-jokes{
+    background-color: #f8dd40;
+    padding: 2px;
+    border-radius: 10px;
+    margin-left: 4px;
+    color: black;
+}
+.logoPiada-jokes:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.logoPiada-you{
+    font-weight: 700;
+}
+
+.head-panel-piadas{
+    margin: 20px;
+    text-align: center;
+    
+}
+
+.search-piadas{
+    font-size: 20px;
+    padding-left: 10px;
+    width: 50%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    transition: 0.6s;
+}
+
+.search-piadas:focus{
+    background-color: #FFE;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    border-radius: 10px;
+}
+
+.btn-piadas{
+    background-color: #f8dd40;
+    border: none;
+    border-radius: 12px;
+    font-size: 20px;
+    margin-left: 15px;
+    transition: 0.6s;
+    height: 38px;
+    
+}
+
+.btn-piadas:hover{
+    background-color: #d4bd36;
+}
+
+.ranking-piadas-head{
+    text-align: center;
+    margin-top: 20px;
+    
+}
+.ranking-tittle{
+    background-color: #f8dd40;
+    padding: 4px;
+    border-radius: 10px;
+    margin-left: 4px;
+    color: black;
+    font-weight: 600;
+}
+.ranking-tittle:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.tabela-rank{
+    
+    text-align: center;
+    width: 100%;
+       border-radius: 50px;
+    
+}
+
+.n-tabela{
+    border: 3px solid #f8dd40;
+    border-radius: 50px;
+    width: 20%;
+}
+
+.p-tabela{
+    border: 3px solid #f8dd40;
+    border-radius: 30px;
+    width: 60%;
+}
+
+.teste{
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    padding-right:10px;
+}
+
+                    /*BODY DE PIADOCAS*/
+
+
+.piada-div{
+    background-color: #FFFFEE;
+    border-radius: 30px;
+    margin: 50px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.6s;   
+}
+
+.piada-div:hover{
+    box-shadow: 2px 2px 20px 1px #555;
+    cursor: pointer;
+}
+
+
+.texto-piada-div{
+    font-size: 18px;
+}
+
+.emoji{
+    width: 35px;
+    height: 35px;
+}
+.curtidas{
+    display: flex;
+    font-size: 25px;
+}
+
+
+
+.autor-piada{
+    background-color: #fdfdae;
+    border-radius: 12px;
+    padding: 5px;
+    height: auto;
+    font-size: 15px;
+    border: 2px solid #f5f569;
+}
+.reset-texto{
+    margin: 0px;
+    padding: 0px;
+}
+
+.curtidas-piada{
+    background-color: #9dffdeb4;
+    border-radius: 12px;
+    padding: 5px;
+    height: auto;
+    font-size: 15px;
+    border: 2px solid #6fd6b4b4;
+}
+
+.tempo-piada{
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 5px;
+    height: auto;
+    font-size: 15px;
+    border: 2px solid #ebebeb;
+}
+
+.resposta-piada{
+    background-color: #f4ff53a8;
+    color: #f4ff53;
+    border-radius: 15px;
+    transition: 0.6s;
+}
+
+.resposta-piada:hover{
+    color: black;
+}
+
+.titulo-piada{
+    text-align: left;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.categoria-piada{
+    background-color: #bfc93a;
+    border-radius: 12px;
+    padding: 5px;
+    height: auto;
+    font-size: 15px;
+    border: 2px solid #ebebeb;
+    max-height: 34px;
+}
+
+
+.imagem-piada{
+    margin-bottom: 20px;
+    border: 2px solid rgb(250, 203, 47);
+    border-radius: 10px;
+    width: 350px;
+    transition: 0.6s;
+}
+
+.imagem-piada:hover{
+    width: 450px;
+}
+/* ====X==== TELA HOME PIADAS ====X====*/
+
+
+/*  ====X==== MODAL CADASTRAR PIADA ====X====  */
+
+.modal-content{
+    background-color: #FFEE93;
+    width: 550px;
+    border-radius: 45px;
+    text-align: center;
+    margin: 0 auto;
+    box-shadow: 3px 3px 20px 1px #333;
+}
+.modal-dialog{
+    transition: 0.4s;       
+}
+
+.modal-title{
+    color: #333;
+    font-size: 35px;
+    margin-bottom:0;
+}
+.close{
+    margin-right: 15px;
+}
+.btnMusica{
+    background-color: transparent;
+    border: solid #FC80B8 2px;
+    color: white;
+    transition: 0.3s;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family: 'Fredoka', sans-serif;
+}
+.btnMusica:hover{
+    background-color: #FC80B8;
+    color: black;
+}
+.btnFile{
+    border-radius: 8px;
+    background-color: transparent;
+    border: solid #FC80B8 2px;
+    color: white;
+    transition: 0.3s;
+    font-size: 16px;
+    padding: 5px;
+    font-family: 'Fredoka', sans-serif;
+    margin-bottom: 15px;
+
+}
+.btnFile:hover{
+    cursor: pointer;
+}
+.CantorMusic{
+    color:gray;
+    margin-top: 0;
+}
+.modal-header
+{
+    margin-bottom: 0;
+}
+
+.inputAdd{
+    border: solid #FC80B8 2px;
+    background-color: #2e2e2e;
+    border-radius: 10px;
+    width: 180px;
+    outline: none;
+    transition: 0.35s;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 15px;
+    transition: 0.4s;
+}
+
+.inputText{
+    margin-bottom: 0;
+    margin-left: 50px;
+    font-size: 20px;
+    font-family: 'Fredoka', sans-serif;
+
+
+}
+
+.inputAdd:hover{
+    width: 200px;
+}
+.inputAdd:focus{
+    width: 200px;
+}
+/*  ====X==== MODAL CADASTRAR PIADA ====X====  */
+
+
+
+
+/*  ====X==== MODAL CURTIR PIADA ====X====  */
+
+.btn-curtir{
+    background-color: #31bb31;
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 120px;
+    font-size: 30px;
+    border: none;
+    margin-bottom: 25px;
+    transition: 0.3s;
+    margin-right: 15px;
+}
+.btn-curtir:hover{
+    background-color: #279c10;
+}
+hr{
+    border-top-color: rgb(0, 0, 0)
+}
+.btn-cancelar{
+    background-color: #d42710;
+    margin-top: 20px;
+    border-radius: 20px;
+    font-size: 30px;
+    border: none;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+.btn-cancelar:hover{
+    background-color: #9b1309;
+}
+
+
+.modal-content-curtir{
+    background-color: #ffffff;
+    width: 550px;
+    border-radius: 45px;
+    text-align: center;
+    margin: 0 auto;
+    box-shadow: 3px 3px 20px 1px #333;
+}
+/*  ========= MODAL CURTIR PIADA =========  */
+
