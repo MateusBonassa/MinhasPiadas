@@ -13,17 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/books")
 public class BooksController {
 
-    @Autowired
-    private BooksRepository booksRepository;
 
     @GetMapping("/")
-    public List<Book> list() {
-        return this.booksRepository.findAll();
+    public String list() {
+        return "salve";
     }
 
-    @PostMapping("/")
-    public Book create(@RequestBody Book book) {
-        return this.booksRepository.save(book);
-    }
 
 }
