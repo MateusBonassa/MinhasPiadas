@@ -55,6 +55,7 @@ public class PiadaRestController {
     public ResponseEntity <Object> buscaPiadaUsuario()
     {   
         Claims claim =  JWTTokenProvider.getAllClaimsFromToken(tokenSave.token);
+        System.out.println(Integer.parseInt(claim.get("id").toString()));
         int id = Integer.parseInt(claim.get("id").toString());
         System.out.println(id);
         List<Piada> piadas = piadaRepository.buscaPorCodigo(id);

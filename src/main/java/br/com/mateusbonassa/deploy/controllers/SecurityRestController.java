@@ -31,7 +31,7 @@ public ResponseEntity <Object> autenticar(String login, String senha)
     try{
         
         usu = usuarioRepository.encontrarUsuario(login,senha);
-        
+        System.out.println(usu.getId());
         token = JWTTokenProvider.getToken(login, usu.getNivel(),usu.getId());
         System.out.println(token);
         Claims claim =  JWTTokenProvider.getAllClaimsFromToken(token);

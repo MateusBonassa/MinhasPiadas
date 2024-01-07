@@ -461,6 +461,7 @@ function validarDadosCT() {
   {
       
       const url = 'apis/busca-piada-usuario';
+      console.log(localStorage.getItem("token"))
       fetch(url, {method: 'get'})
       .then(response=>{ if(response.ok)
          return response.text()
