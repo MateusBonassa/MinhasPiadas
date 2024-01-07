@@ -2,6 +2,9 @@ package br.com.mateusbonassa.deploy.controllers;
 
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,12 +36,12 @@ public ResponseEntity <Object> autenticar(String login, String senha)
         usu = usuarioRepository.encontrarUsuario(login,senha);
         System.out.println(usu.getId());
         token = JWTTokenProvider.getToken(login, usu.getNivel(),usu.getId());
-        System.out.println(token);
+        System.out.println("Token gerado:   "+token);
         Claims claim =  JWTTokenProvider.getAllClaimsFromToken(token);
-        System.out.println(claim.get("nivel"));
-        System.out.println(claim.getSubject());
         tokenSave.token = token;
-        return new ResponseEntity<>(token,HttpStatus.OK);
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("token", token);
+        return new ResponseEntity<>(responseMap,HttpStatus.OK);
     }
     catch(Exception e){
        return new ResponseEntity<>("ACESSO NAO PERMITIDO",HttpStatus.NOT_ACCEPTABLE);

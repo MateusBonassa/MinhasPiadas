@@ -5,12 +5,12 @@ function logar() {
     for (const pair of new FormData(document.getElementById('fdados'))) {
      data.append(pair[0], pair[1]);
     }
-   
     fetch(URL_TO_FETCH, {method: 'post', body: data })
-     .then(response=>{ if(response.ok) window.location.href = "home.html"; else throw Error("Usuário não Encontrado!") })
-     .then(text => { localStorage.setItem("token", text);})
+     .then(response=>{ if(response.ok) return response.json(); else throw Error("Usuário não Encontrado!") })
+     .then(result => {localStorage.setItem("token", result.token); window.location.href = "home.html";})
      .catch(err => alert(err.message)) 
 }
+
 
 
 function cadastrar()
@@ -42,7 +42,7 @@ function adicionarPiada()
     var resposta = document.getElementById("resposta").value;
     console.log(titulo+texto+keywords+cat_id+cat_nome);
 
-    const URL = `apis/cadastrar-piada?titulo=${titulo}&&texto=${texto}&&keywords=${keywords}&&categoria=${cat_id}&&CatNome=${cat_nome}&&resposta=${resposta}`;
+    const URL = `apis/cadastrar-piada?titulo=${titulo}&&texto=${texto}&&keywords=${keywords}&&categoria=${cat_id}&&CatNome=${cat_nome}&&resposta=${resposta}&&token=${localStorage.getItem("token")}`;
    
     if(validarDadosCadPiada()){
         fetch(URL, {method: 'get'})
@@ -460,7 +460,8 @@ function validarDadosCT() {
   function carregarPiadasUsuario()
   {
       
-      const url = 'apis/busca-piada-usuario';
+      const url = 'apis/busca-piada-usuario?token='+localStorage.getItem("token");
+
       console.log(localStorage.getItem("token"))
       fetch(url, {method: 'get'})
       .then(response=>{ if(response.ok)

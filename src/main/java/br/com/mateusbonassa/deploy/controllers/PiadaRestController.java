@@ -52,9 +52,9 @@ public class PiadaRestController {
         return new ResponseEntity<>(piadas,HttpStatus.OK);
     }
     @GetMapping("/busca-piada-usuario")
-    public ResponseEntity <Object> buscaPiadaUsuario()
+    public ResponseEntity <Object> buscaPiadaUsuario(String token)
     {   
-        Claims claim =  JWTTokenProvider.getAllClaimsFromToken(tokenSave.token);
+        Claims claim =  JWTTokenProvider.getAllClaimsFromToken(token);
         System.out.println(Integer.parseInt(claim.get("id").toString()));
         int id = Integer.parseInt(claim.get("id").toString());
         System.out.println(id);
@@ -63,9 +63,9 @@ public class PiadaRestController {
     }
 
     @GetMapping("/cadastrar-piada")
-    public ResponseEntity<Object> cadastrarPiada(String titulo,String texto,String keywords,int categoria,String CatNome,String resposta)
+    public ResponseEntity<Object> cadastrarPiada(String titulo,String texto,String keywords,int categoria,String CatNome,String resposta,String token)
     {
-        String token = tokenSave.token;
+        //String token = tokenSave.token;
         //System.out.println(titulo+texto+keywords+categoria+CatNome+token);
         Claims claim =  JWTTokenProvider.getAllClaimsFromToken(token);
         Long id = Long.parseLong(claim.get("id").toString());
