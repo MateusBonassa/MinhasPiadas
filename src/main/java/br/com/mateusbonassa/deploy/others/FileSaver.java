@@ -18,7 +18,7 @@ public class FileSaver {
             String ext  = file.getOriginalFilename().replaceAll("^.*\\.(.*)$", "$1");
             path = path.replace("\\", "/");
             String complemento =  id.toString()+"_"+titulo.replace(" ", "")+"."+ext;
-            path = path+"/webpiadas/src/main/resources/static/imagens/" +complemento;
+            path = path+"/src/main/resources/static/imagens/" +complemento;
             file.transferTo(new File(path));
 
             return "imagens/"+complemento;

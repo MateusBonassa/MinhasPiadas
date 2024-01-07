@@ -5,9 +5,9 @@ function logar() {
     for (const pair of new FormData(document.getElementById('fdados'))) {
      data.append(pair[0], pair[1]);
     }
-    //window.location.href = "home.html"
+   
     fetch(URL_TO_FETCH, {method: 'post', body: data })
-     .then(response=>{ if(response.ok) alert("Sucesso"); else throw Error("Usuário não Encontrado!") })
+     .then(response=>{ if(response.ok) window.location.href = "home.html"; else throw Error("Usuário não Encontrado!") })
      .then(text => { localStorage.setItem("token", text);})
      .catch(err => alert(err.message)) 
 }
