@@ -54,15 +54,31 @@ function adicionarPiada()
 function adicionarPiadaImg()
 {
     const URL_TO_FETCH = '/apis/cadastrar-piada-img';
-    const data = new URLSearchParams();
-    for (const pair of new FormData(document.getElementById('cadPiadaImg'))) {
-     data.append(pair[0], pair[1]);
-    }
-    if(validarDadosCadPiadaImg()){
-        fetch(URL_TO_FETCH, {method: 'post', body: data })
-        .then(response=>{ if(response.ok) alert("Sucesso"); else throw Error("erro") })
+    const formulario = document.getElementById('cadPiadaImg');
+    const data = new FormData(formulario);
+    data.append('token', localStorage.getItem("token"));
+
+    /*for (const [chave, valor] of data) {
+        alert(`${chave}: ${valor}`);
+      }*/
+      const options = {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Content-Type': 'multipart/form-data' ,//é geralmente configurado automaticamente pelo FormData
+            'Accept': 'application/json', // Adicione este cabeçalho para indicar o tipo de resposta desejado
+        },
+    };
+        fetch(URL_TO_FETCH,{ method: 'post',body:data})
+        .then(response=>{ 
+            
+            if(response.ok) {
+                alert("Sucesso");
+                window.location.reload();
+            }
+               else throw Error("erro") })
         .catch(err => alert(err.message)) 
-    }
+    
 }
 
 

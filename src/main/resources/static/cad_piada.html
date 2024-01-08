@@ -83,7 +83,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
               <div class="modal-body" >
-                  <form  id="cadPiadaImg" method="POST" action="/apis/cadastrar-piada-img" enctype="multipart/form-data">
+                  <form  id="cadPiadaImg"  enctype="multipart/form-data">
                       
              
                       <p class="text-form">Titulo</p><input class="input-form" type="text" name="titulo2" id="titulo2"   required><br>
@@ -91,7 +91,7 @@
                       <p class="text-form">Keywords</p><textarea class="input-form"  name="keywords2" id="keywords2"  placeholder="Separar com espaço, exemplo: Corrida Idosos Festa" required></textarea><br>
                       <p class="text-form">Categoria</p><select id="categoriaImg" class="input-form" name="categoriaImg"></select><br>
                       <p class="text-form">Insira a imagem:</p><input type="file" name="imagem" id="imagem"  required/> <br>
-                      <input class="btn-login" type="submit" onclick="validarDadosCadPiadaImg()"  name="Enviar" value="Enviar" >    
+                      <input class="btn-login" type="button" onclick="adicionarPiadaImg()"  name="Enviar" value="Enviar" >    
 
 
                   </form>
