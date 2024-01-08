@@ -108,13 +108,14 @@ function pegarCategorias(categoria)
 function redirecionarCadPi()
 {
     const URL_TO_FETCH = '/security/testar-login';
+    const currentOrigin = window.location.origin;
     fetch(URL_TO_FETCH, {method: 'post'})
     .then(response=> response.text())
     .then(result=>{  
         if(JSON.parse(result)==true)
-            window.location.href = "http://localhost:8080/cad_piada.html";
+            window.location.href = currentOrigin+"/cad_piada.html";
         else
-            window.location.href = "http://localhost:8080";
+            window.location.href = window.location.protocol + "//" + window.location.host;
     
     })
     .catch(err=> console.error(err));
