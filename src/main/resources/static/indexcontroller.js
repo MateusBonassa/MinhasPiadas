@@ -1,4 +1,12 @@
 
+
+
+
+
+  
+
+
+
 function logar() {
     const URL_TO_FETCH = '/security/autenticar';
     const data = new URLSearchParams();
@@ -50,7 +58,7 @@ function adicionarPiada()
         .catch(err => alert(err.message)) 
     }
 }
-
+/*
 function adicionarPiadaImg()
 {
     const URL_TO_FETCH = '/apis/cadastrar-piada-img';
@@ -58,9 +66,7 @@ function adicionarPiadaImg()
     const data = new FormData(formulario);
     data.append('token', localStorage.getItem("token"));
 
-    /*for (const [chave, valor] of data) {
-        alert(`${chave}: ${valor}`);
-      }*/
+ 
       const options = {
         method: 'POST',
         body: data,
@@ -79,7 +85,7 @@ function adicionarPiadaImg()
                else throw Error("erro") })
         .catch(err => alert(err.message)) 
     
-}
+}*/
 
 
 

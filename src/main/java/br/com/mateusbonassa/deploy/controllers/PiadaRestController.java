@@ -84,19 +84,19 @@ public class PiadaRestController {
     }
 
 
-    @PostMapping( value={"/cadastrar-piada-img"},consumes ={MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<Object>  cadastrarPiadaImg(@RequestParam("imagem") MultipartFile  imagem,@RequestParam("titulo2") String titulo,@RequestParam("texto2") String texto,@RequestParam("keywords2") String keywords,@RequestParam("categoriaImg") int categoria,@RequestParam("token") String token)
+    @PostMapping("/cadastrar-piada-img")
+    public ResponseEntity<Object>  cadastrarPiadaImg(@RequestParam("imagem") String  imagem,@RequestParam("titulo2") String titulo,@RequestParam("texto2") String texto,@RequestParam("keywords2") String keywords,@RequestParam("categoriaImg") int categoria,@RequestParam("token") String token)
     {
-        System.out.println(imagem.getOriginalFilename());
+        System.out.println(imagem);
         System.out.println("Token na img  "+token);
         Claims claim =  JWTTokenProvider.getAllClaimsFromToken(token);
         Long id = Long.parseLong(claim.get("id").toString());
        
-        FileSaver filesaver = new FileSaver();  
+        /*FileSaver filesaver = new FileSaver();  
         
-        String path = filesaver.write(imagem,id,titulo);
+        String path = filesaver.write(imagem,id,titulo);*/
 
-        piadaRepository.save(new Piada(titulo,texto,keywords,0,path,1,new Categoria(new Long(categoria),""),new Usuario(id)));
+       // piadaRepository.save(new Piada(titulo,texto,keywords,0,path,1,new Categoria(new Long(categoria),""),new Usuario(id)));
 
          return ResponseEntity.ok().build();
         
@@ -118,9 +118,11 @@ public class PiadaRestController {
     @GetMapping("/deletar-piada")
     public ResponseEntity<Object> deletar(Long Id)
     {
+        /* 
             Piada piada = piadaRepository.buscarPorId(Id);
 
             piadaRepository.delete(piada);
+            return new ResponseEntity<>("",HttpStatus.OK);*/
             return new ResponseEntity<>("",HttpStatus.OK);
     }
 

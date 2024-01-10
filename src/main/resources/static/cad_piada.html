@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="estilos/style.css">
     <link rel="stylesheet" href="estilos/scroll.css">
     <script src="indexcontroller.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script src="uparImagens.js"></script>
 </head>
 <body onload="carregarPiadasUsuario()">
     <!-- ========= BODY VISIVEL ========= -->
@@ -91,7 +94,7 @@
                       <p class="text-form">Keywords</p><textarea class="input-form"  name="keywords2" id="keywords2"  placeholder="Separar com espaço, exemplo: Corrida Idosos Festa" required></textarea><br>
                       <p class="text-form">Categoria</p><select id="categoriaImg" class="input-form" name="categoriaImg"></select><br>
                       <p class="text-form">Insira a imagem:</p><input type="file" name="imagem" id="imagem"  required/> <br>
-                      <input class="btn-login" type="button" onclick="adicionarPiadaImg()"  name="Enviar" value="Enviar" >    
+                      <input class="btn-login" type="button" onclick="uploadImage()"  name="Enviar" value="Enviar" >    
 
 
                   </form>
@@ -138,5 +141,7 @@
           </div>
         </div>
           <!-- ====X==== MODAL CATEGORIA====X==== -->
+      
+     
 </body>
 </html>
