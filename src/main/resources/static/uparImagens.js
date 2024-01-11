@@ -46,8 +46,8 @@ const firebaseConfig = {
             .child(uploadedFileName)
             .getDownloadURL()
             .then((url) => {
-              alert(url);
-              fazerRequisicao(url);
+              //alert(url);
+              fazerRequisicao(url,file_name);
             });
         }
       );
@@ -57,15 +57,46 @@ const firebaseConfig = {
          
   }
 
+const deletar =(id,img) =>{
+  const URL_TO_FETCH = '/apis/deletar-piada?Id='+id;
+  console.log(id+"---"+img);
+  fetch(URL_TO_FETCH, {method: 'get'})
+   .then(response=>{ 
+    
+    if(response.ok) 
+    {
+      if(img!="0") {
+        apagarNoFirebase(img);
+      }
+      else
+        window.location.reload();
+    }
+  else throw Error("erro") })
+   .catch(err => alert(err.message)) 
+  
+}
 
+function apagarNoFirebase(img){
+  const storageRef = storage.ref();
+  const fileRef = storageRef.child('images/'+img);
+  fileRef.delete()
+  .then(() => {
+    alert('Arquivo excluído com sucesso!');
+    window.location.reload();
+  })
+  .catch((error) => {
+    alert('Ocorreu um erro ao tentar apagar o arquivo');
+    window.location.reload();
+  });
+}
 
-function fazerRequisicao(urlImg) {
+function fazerRequisicao(urlImg,nome) {
     const URL_TO_FETCH = '/apis/cadastrar-piada-img';
     const formulario = document.getElementById("cadPiadaImg");
     const data = new URLSearchParams(new FormData(formulario));
     data.append('token', localStorage.getItem("token"));
     data.append('imagem',urlImg);
-
+    data.append('imgNome',nome);
 
     fetch( URL_TO_FETCH, {
         method: 'POST',

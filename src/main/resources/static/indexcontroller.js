@@ -499,7 +499,7 @@ function validarDadosCT() {
                       if(piada.tipo==0)
                       {
                           piadas+=`
-                          <div class="piada-div" onclick="marcarPraDeletar(${piada.id})" data-toggle="modal" data-target="#modal-deletar">
+                          <div class="piada-div" onclick="marcarPraDeletar(${piada.id},'0')" data-toggle="modal" data-target="#modal-deletar">
                       
                       <div class="titulo-piada flex-div space-between">
                           <p>${piada.titulo}</p>
@@ -527,7 +527,7 @@ function validarDadosCT() {
                       else if(piada.tipo==1)
                       {
                           piadas+=`
-                          <div class="piada-div" data-toggle="modal" onclick="marcarPraDeletar(${piada.id})" data-target="#modal-deletar">
+                          <div class="piada-div" data-toggle="modal" onclick="marcarPraDeletar(${piada.id},'${piada.imgNome}')" data-target="#modal-deletar">
                       <div class="titulo-piada flex-div space-between">
                           <p>${piada.titulo}</p>
                           <p class="categoria-piada">${piada.categoria.nome}</p>
@@ -695,26 +695,26 @@ function adicionarCategoria()
 
 
 
-function marcarPraDeletar(piada_id)
+function marcarPraDeletar(piada_id,piada_img)
 {
     const URL_TO_FETCH = '/security/testar-login';
     fetch(URL_TO_FETCH, {method: 'post'})
     .then(response=> response.text())
     .then(result=>{  
         if(JSON.parse(result)==true)
-            document.getElementById("deletar").setAttribute("onclick","deletar("+piada_id+")");
+            document.getElementById("deletar").setAttribute("onclick","deletar("+piada_id+",'"+piada_img+"')");
         else
-            window.location.href = "http://localhost:8080";
+            window.location.href = window.location.protocol + "//" + window.location.host;
 
      })
     .catch(err=> console.error(err));
     
 }
-
+/*
 function deletar(Id){
     const URL_TO_FETCH = '/apis/deletar-piada?Id='+Id;
     console.log(Id);
     fetch(URL_TO_FETCH, {method: 'get'})
      .then(response=>{ if(response.ok) window.location.reload();  else throw Error("erro") })
      .catch(err => alert(err.message)) 
-}
+}*/

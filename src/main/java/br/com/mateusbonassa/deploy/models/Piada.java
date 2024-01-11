@@ -40,6 +40,8 @@ public class Piada implements Serializable
     private String imagem;
     @Column(name="pi_tipo")
     private int tipo;
+    @Column(name="pi_imgnome")
+    private String imgNome;
     @ManyToOne
     @JoinColumn(name="cat_id", nullable=false)
     private Categoria categoria;
@@ -50,7 +52,17 @@ public class Piada implements Serializable
     public Piada() {
     }
 
-    
+        
+    public String getImgNome() {
+        return imgNome;
+    }
+
+
+
+    public void setImgNome(String imgNome) {
+        this.imgNome = imgNome;
+    }
+
 
     public int getTipo() {
         return tipo;
@@ -101,7 +113,7 @@ public class Piada implements Serializable
 
 
     public Piada(Long id, String titulo, String texto, String keywords, int ranking, String imgResp, int tipo,
-            Categoria categoria, Usuario usuario) {
+            Categoria categoria, Usuario usuario,String imgNome) {
         this.id = id;
         this.titulo = titulo;
         this.texto = texto;
@@ -109,14 +121,18 @@ public class Piada implements Serializable
         this.ranking = ranking;
         if(tipo==0)
                 this.resposta = imgResp;
-        else
-            this.imagem = imgResp;
+        else{
+             this.imagem = imgResp;
+             this.imgNome = imgNome;
+        }
+         
         this.tipo = tipo;
         this.categoria = categoria;
         this.usuario = usuario;
+      
     }
     public Piada( String titulo, String texto, String keywords, int ranking, String imgResp, int tipo,
-    Categoria categoria, Usuario usuario) {
+    Categoria categoria, Usuario usuario,String imgNome) {
 
         this.titulo = titulo;
         this.texto = texto;
@@ -124,8 +140,11 @@ public class Piada implements Serializable
         this.ranking = ranking;
         if(tipo==0)
                 this.resposta = imgResp;
-        else
+        else{
             this.imagem = imgResp;
+             this.imgNome = imgNome;
+        }
+           
         this.tipo = tipo;
         this.categoria = categoria;
         this.usuario = usuario;
