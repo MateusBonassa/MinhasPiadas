@@ -24,7 +24,7 @@ function logar() {
 function cadastrar()
 {
     
-
+   // localStorage.setItem("token", result.token);
     var nome = document.getElementById("nomecompleto").value;
     var login = document.getElementById("login").value;
     var senha = document.getElementById("senha").value;
@@ -34,7 +34,7 @@ function cadastrar()
         
         fetch(URL_TO_FETCH, {method: 'GET'})
         .then(response=>{ if(response.ok) return response.json(); else alert("Ocorreu um erro no cadastro, verifique o email e senha") })
-        .then(result => {localStorage.setItem("token", result.token);window.location.href = window.location.protocol + "//" + window.location.host;})
+        .then(result => {alert( window.location.protocol + "//" + window.location.host);window.location.href = window.location.protocol + "//" + window.location.host;})
         .catch(err => alert(err.message)) 
     }
 }
