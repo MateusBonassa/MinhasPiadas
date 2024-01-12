@@ -33,8 +33,8 @@ function cadastrar()
         const URL_TO_FETCH = '/cadastro/cad-usuario?nomecompleto='+nome+'&&login='+login+'&&senha='+senha;      
         
         fetch(URL_TO_FETCH, {method: 'GET'})
-        .then(response=>{ if(response.ok) window.location.href = "http://localhost:8080/home.html"; else throw Error("erro") })
-        .then(text => {alert(text); window.localStorage.setItem("token", text);})
+        .then(response=>{ if(response.ok) return response.json(); else alert("Ocorreu um erro no cadastro, verifique o email e senha") })
+        .then(result => {localStorage.setItem("token", result.token);window.location.href = "index.html";})
         .catch(err => alert(err.message)) 
     }
 }
@@ -48,7 +48,6 @@ function adicionarPiada()
     var cat_id = document.getElementById("categoriaResp").value;
     var cat_nome = document.getElementById(cat_id).innerHTML;
     var resposta = document.getElementById("resposta").value;
-    console.log(titulo+texto+keywords+cat_id+cat_nome);
 
     const URL = `apis/cadastrar-piada?titulo=${titulo}&&texto=${texto}&&keywords=${keywords}&&categoria=${cat_id}&&CatNome=${cat_nome}&&resposta=${resposta}&&token=${localStorage.getItem("token")}`;
    
@@ -58,34 +57,7 @@ function adicionarPiada()
         .catch(err => alert(err.message)) 
     }
 }
-/*
-function adicionarPiadaImg()
-{
-    const URL_TO_FETCH = '/apis/cadastrar-piada-img';
-    const formulario = document.getElementById('cadPiadaImg');
-    const data = new FormData(formulario);
-    data.append('token', localStorage.getItem("token"));
 
- 
-      const options = {
-        method: 'POST',
-        body: data,
-        headers: {
-            'Content-Type': 'multipart/form-data' ,//é geralmente configurado automaticamente pelo FormData
-            'Accept': 'application/json', // Adicione este cabeçalho para indicar o tipo de resposta desejado
-        },
-    };
-        fetch(URL_TO_FETCH,{ method: 'post',body:data})
-        .then(response=>{ 
-            
-            if(response.ok) {
-                alert("Sucesso");
-                window.location.reload();
-            }
-               else throw Error("erro") })
-        .catch(err => alert(err.message)) 
-    
-}*/
 
 
 
@@ -485,7 +457,6 @@ function validarDadosCT() {
       
       const url = 'apis/busca-piada-usuario?token='+localStorage.getItem("token");
 
-      console.log(localStorage.getItem("token"))
       fetch(url, {method: 'get'})
       .then(response=>{ if(response.ok)
          return response.text()
@@ -560,11 +531,9 @@ function validarDadosCT() {
 function nivelAcessoCat()
 {
     const URL_TO_FETCH = '/cadastro/verificar-admin';
-    console.log("entrou");
     fetch(URL_TO_FETCH, {method: 'get'})
     .then(response=> response.text())
     .then(result=>{     
-        console.log(JSON.parse(result));
         if(JSON.parse(result)==true)
             document.getElementById("botoes").innerHTML+=`<button class="btn-piadas" data-toggle="modal"  data-target="#modalCategoria">Cadastrar Categorias</button>`;
 
@@ -683,7 +652,6 @@ function carregarPiadasRanking()
 function adicionarCategoria()
 {
     var cat = document.getElementById("catnome").value;
-    console.log(cat);
 
     const URL = `apis/cadastrar-categoria?CatNome=${cat}`;
    
@@ -710,11 +678,4 @@ function marcarPraDeletar(piada_id,piada_img)
     .catch(err=> console.error(err));
     
 }
-/*
-function deletar(Id){
-    const URL_TO_FETCH = '/apis/deletar-piada?Id='+Id;
-    console.log(Id);
-    fetch(URL_TO_FETCH, {method: 'get'})
-     .then(response=>{ if(response.ok) window.location.reload();  else throw Error("erro") })
-     .catch(err => alert(err.message)) 
-}*/
+

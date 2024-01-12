@@ -1,5 +1,8 @@
 package br.com.mateusbonassa.deploy.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +38,9 @@ public class UsuarioRestController {
                 usuarioRepository.save(new Usuario(nomecompleto,login,senha,"user"));
                 Long id = usuarioRepository.pegarCodigoUsuario(login);
                 token = JWTTokenProvider.getToken(login, "user",id);
-                tokenSave.token = token;
-                return new ResponseEntity<>(token,HttpStatus.OK);
+                Map<String, String> responseMap = new HashMap<>();
+                responseMap.put("token", token);
+                return new ResponseEntity<>(responseMap,HttpStatus.OK);
             }
             else
                 return new ResponseEntity<>("Já existe usuario com o mesmo login",HttpStatus.NOT_ACCEPTABLE);

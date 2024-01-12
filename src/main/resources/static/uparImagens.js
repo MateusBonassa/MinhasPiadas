@@ -59,7 +59,6 @@ const firebaseConfig = {
 
 const deletar =(id,img) =>{
   const URL_TO_FETCH = '/apis/deletar-piada?Id='+id;
-  console.log(id+"---"+img);
   fetch(URL_TO_FETCH, {method: 'get'})
    .then(response=>{ 
     
