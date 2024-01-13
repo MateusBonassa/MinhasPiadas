@@ -23,7 +23,7 @@ function logar() {
 
 function cadastrar()
 {
-    
+    //alert( window.location.protocol + "//" + window.location.host);window.location.href = window.location.protocol + "//" + window.location.host;
    // localStorage.setItem("token", result.token);
     var nome = document.getElementById("nomecompleto").value;
     var login = document.getElementById("login").value;
@@ -32,9 +32,20 @@ function cadastrar()
     {
         const URL_TO_FETCH = '/cadastro/cad-usuario?nomecompleto='+nome+'&&login='+login+'&&senha='+senha;      
         
-        fetch(URL_TO_FETCH, {method: 'GET'})
-        .then(response=>{ if(response.ok) return response.json(); else alert("Ocorreu um erro no cadastro, verifique o email e senha") })
-        .then(result => {alert( window.location.protocol + "//" + window.location.host);window.location.href = window.location.protocol + "//" + window.location.host;})
+        fetch(URL_TO_FETCH, {method: 'get'})
+        .then(response=>{  
+            return response.text(); })
+        .then(result => {
+            var dados = JSON.parse(result);
+            if(dados.mensagem!=""){
+                alert(dados.mensagem);
+            }
+            else{
+                alert("Cadastro efetuado com sucesso!\nFaça o login para acessar!");
+                window.location.href = window.location.protocol + "//" + window.location.host;
+            }
+        
+        })
         .catch(err => alert(err.message)) 
     }
 }

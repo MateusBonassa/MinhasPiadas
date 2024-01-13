@@ -27,7 +27,7 @@ public class UsuarioRestController {
     @GetMapping("/cad-usuario")
     public ResponseEntity<Object> cadastrarUsuario(String nomecompleto,String login,String senha)
     {
-        
+        Map<String, String> responseMap = new HashMap<>();
         int existe;
         String token="";
         try{
@@ -38,15 +38,19 @@ public class UsuarioRestController {
                 usuarioRepository.save(new Usuario(nomecompleto,login,senha,"user"));
                 Long id = usuarioRepository.pegarCodigoUsuario(login);
                 token = JWTTokenProvider.getToken(login, "user",id);
-                Map<String, String> responseMap = new HashMap<>();
+                
                 responseMap.put("token", token);
+                responseMap.put("mensagem", "");
                 return new ResponseEntity<>(responseMap,HttpStatus.OK);
             }
-            else
-                return new ResponseEntity<>("Já existe usuario com o mesmo login",HttpStatus.NOT_ACCEPTABLE);
+            else{
+                responseMap.put("mensagem", "Já existe usuario com o mesmo login");
+                return new ResponseEntity<>(responseMap,HttpStatus.BAD_REQUEST);
+            }
         }
         catch(Exception e){
-           return new ResponseEntity<>("ERRO AO CADASTRAR",HttpStatus.NOT_ACCEPTABLE);
+            responseMap.put("mensagem", "Ocorreu um erro ao cadastrar, tente novamente!");
+           return new ResponseEntity<>(responseMap,HttpStatus.BAD_REQUEST);
         }
        
     }
