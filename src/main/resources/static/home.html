@@ -18,8 +18,11 @@
     <link rel="stylesheet" href="estilos/scroll.css">
     <script src="indexcontroller.js"></script>
 </head>
-<body onload="carregarPiadas(); carregarPiadasRanking()">
-    <div class="bg-piadas panel-flex" >
+<body onload="carregarPiadas_e_Ranking()">
+    <div class="loader-container" id="loaderContainer">
+        <div class="loader"></div>
+      </div>
+    <div class="bg-piadas panel-flex" id="dadosTela">
         <div class="panel-piadas-principal scrollbar scrollbar-sunny-morning">
             <div class="head-panel-piadas wid-100">
                 <h1 class="logoPiada-you"><a href="home.html" class="logoPiada-jokes0">You</a><a class="logoPiada-jokes" href="home.html">Jokes</a></h1>

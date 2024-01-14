@@ -23,8 +23,6 @@ function logar() {
 
 function cadastrar()
 {
-    //alert( window.location.protocol + "//" + window.location.host);window.location.href = window.location.protocol + "//" + window.location.host;
-   // localStorage.setItem("token", result.token);
     var nome = document.getElementById("nomecompleto").value;
     var login = document.getElementById("login").value;
     var senha = document.getElementById("senha").value;
@@ -53,8 +51,16 @@ function cadastrar()
 
 function adicionarPiada()
 {
+    const loaderContainer = document.getElementById("loaderContainer");
+    const content = document.getElementById("modalPiResp");
+    loaderContainer.style.display = "flex";
+    content.style.pointerEvents = "none"; // Desativa interação com o conteúdo
     var titulo = document.getElementById("titulo").value;
     var texto = document.getElementById("texto").value;
+    //console.log(texto.charCodeAt(5))
+     texto = texto.replace(/\r\n|\n|\r/g, '<br>');
+     texto = '<p>'+texto+'</p>';
+    console.log(texto);
     var keywords = document.getElementById("keywords").value;
     var cat_id = document.getElementById("categoriaResp").value;
     var cat_nome = document.getElementById(cat_id).innerHTML;
@@ -64,11 +70,21 @@ function adicionarPiada()
    
     if(validarDadosCadPiada()){
         fetch(URL, {method: 'get'})
-        .then(response=>{ if(response.ok) window.location.reload(); else throw Error("erro") })
+        .then(response=>{ 
+            if(response.ok)
+            {
+                loaderContainer.style.display = "none";
+                content.style.pointerEvents = "auto";
+                alert("Piada cadastrada com sucesso!")
+                window.location.reload();
+            }
+            
+           else throw Error("erro") })
         .catch(err => alert(err.message)) 
     }
+    loaderContainer.style.display = "none";
+    content.style.pointerEvents = "auto";
 }
-
 
 
 
@@ -111,9 +127,31 @@ function redirecionarCadPi()
 
 }
 
+function carregarPiadas_e_Ranking(){
+    const loaderContainer = document.getElementById("loaderContainer");
+    const content = document.getElementById("dadosTela");
+    loaderContainer.style.display = "flex";
+    content.style.pointerEvents = "none";
+    const piadasPromise = new Promise((resolve) => {
+        carregarPiadas(resolve);
+    });
 
-function carregarPiadas()
+    const rankingPromise = new Promise((resolve) => {
+        carregarPiadasRanking(resolve);
+    });
+
+    // Aguardando a conclusão de ambas as Promises
+    Promise.all([piadasPromise, rankingPromise]).then(() => {
+        // Ocultando o indicador de carregamento após a conclusão das chamadas assíncronas
+        loaderContainer.style.display = "none";
+        content.style.pointerEvents = "auto"; // Ativa interação com o conteúdo
+    });
+}
+
+function carregarPiadas(callback)
 {
+
+  
     const url = 'apis/listar-todas-piadas';
     fetch(url, {method: 'get'})
     .then(response=>{ if(response.ok)
@@ -184,7 +222,9 @@ function carregarPiadas()
            }    
            )
     .catch(err => alert(err.message)) 
-   
+    if (callback) {
+        callback();
+    }
 }
 
 
@@ -308,7 +348,6 @@ function validarDadosCT() {
     {  login.value = "";
         login.setAttribute('placeholder','Nome invalido!');
         login.style.border = "solid 1px red";
-        //auxPonteiro=1;
         correto = false;
         login.focus();
     }
@@ -394,78 +433,21 @@ function validarDadosCT() {
         keywords.style.border = "none";
     }
 
-    if(resposta.value.length < 5) 
-    {  resposta.value = "";
-        resposta.setAttribute('placeholder','Tamanho minímo de 4 caracteres!');
-        resposta.style.border = "solid 1px red";
-        
-        correto = false;
-        resposta.focus();
-    }
-    else 
-    {
-        resposta.style.border = "none";
-    }
+  
 
 
     return correto;
   }
 
 
-  function validarDadosCadPiadaImg() {
-
-    var titulo2 = document.getElementById("titulo2");
-    var texto2 = document.getElementById("texto2");
-    var keywords2 = document.getElementById("keywords2");
-    var correto=true;
-    
-    if(titulo2.value.length < 5) 
-    {  titulo2.value = "";
-        titulo2.setAttribute('placeholder','Escreva um título maior!');
-        titulo2.style.border = "solid 1px red";
-        
-        correto = false;
-        titulo2.focus();
-    }
-    else 
-    {
-        titulo2.style.border = "none";
-    }
-
-    if(texto2.value.length < 1) 
-    {  texto2.value = "";
-        texto2.setAttribute('placeholder','Tamanho minímo de 5 caracteres!');
-        texto2.style.border = "solid 1px red";
-        //auxPonteiro=1;
-        correto = false;
-        texto2.focus();
-    }
-    else 
-    {
-        texto2.style.border = "none";
-    }
-
-
-    if(keywords2.value.length < 4) 
-    {  keywords2.value = "";
-        keywords2.setAttribute('placeholder','Digite no mínimo uma palavra inteira!');
-        keywords2.style.border = "solid 1px red";
-        //auxPonteiro=1;
-        correto = false;
-        keywords2.focus();
-    }
-    else 
-    {
-        keywords2.style.border = "none";
-    }
-
-    return correto;
-  }
  
 
   function carregarPiadasUsuario()
   {
-      
+    const loaderContainer = document.getElementById("loaderContainer");
+    const content = document.getElementById("dadosTela");
+    loaderContainer.style.display = "flex";
+    content.style.pointerEvents = "none";
       const url = 'apis/busca-piada-usuario?token='+localStorage.getItem("token");
 
       fetch(url, {method: 'get'})
@@ -536,7 +518,8 @@ function validarDadosCT() {
              }    
              )
       .catch(err => alert(err.message)) 
-     
+      loaderContainer.style.display = "none";
+    content.style.pointerEvents = "auto";
   }
   
 function nivelAcessoCat()
@@ -582,7 +565,7 @@ function compare2(a,b) {
     return 0;
   }
 
-function carregarPiadasRanking()
+function carregarPiadasRanking(callback)
 {
     const url = 'apis/listar-todas-piadas';
     let count = 0;
@@ -656,7 +639,9 @@ function carregarPiadasRanking()
            }    
            )
     .catch(err => alert(err.message)) 
-   
+    if (callback) {
+        callback();
+    }
 }
 
 

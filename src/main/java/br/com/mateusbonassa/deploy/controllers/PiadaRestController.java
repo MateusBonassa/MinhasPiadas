@@ -73,6 +73,7 @@ public class PiadaRestController {
 
         try{
             piadaRepository.save(new Piada(titulo,texto,keywords,0,resposta,0,new Categoria(new Long(categoria),CatNome),new Usuario(id),""));
+            System.out.println(texto);
             return new ResponseEntity<>("",HttpStatus.OK);
         }
         catch(Exception e)
@@ -84,7 +85,7 @@ public class PiadaRestController {
 
 
     @PostMapping("/cadastrar-piada-img")
-    public ResponseEntity<Object>  cadastrarPiadaImg(@RequestParam("imagem") String  imagem,@RequestParam("titulo2") String titulo,@RequestParam("texto2") String texto,@RequestParam("keywords2") String keywords,@RequestParam("categoriaImg") int categoria,@RequestParam("token") String token,@RequestParam("imgNome")String imgNome)
+    public ResponseEntity<Object>  cadastrarPiadaImg(@RequestParam("imagem") String  imagem,@RequestParam("titulo2") String titulo,@RequestParam("keywords2") String keywords,@RequestParam("categoriaImg") int categoria,@RequestParam("token") String token,@RequestParam("imgNome")String imgNome)
     {
         imagem = imagem.replace("[object File],", "");
 
@@ -92,7 +93,7 @@ public class PiadaRestController {
         Long id = Long.parseLong(claim.get("id").toString());
    
 
-       piadaRepository.save(new Piada(titulo,texto,keywords,0,imagem,1,new Categoria(new Long(categoria),""),new Usuario(id),imgNome));
+       piadaRepository.save(new Piada(titulo,"",keywords,0,imagem,1,new Categoria(new Long(categoria),""),new Usuario(id),imgNome));
 
          return ResponseEntity.ok().build();
         
