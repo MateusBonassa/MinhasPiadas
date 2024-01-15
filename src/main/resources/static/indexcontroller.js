@@ -132,23 +132,13 @@ function carregarPiadas_e_Ranking(){
     const content = document.getElementById("dadosTela");
     loaderContainer.style.display = "flex";
     content.style.pointerEvents = "none";
-    const piadasPromise = new Promise((resolve) => {
-        carregarPiadas(resolve);
-    });
-
-    const rankingPromise = new Promise((resolve) => {
-        carregarPiadasRanking(resolve);
-    });
-
-    // Aguardando a conclusão de ambas as Promises
-    Promise.all([piadasPromise, rankingPromise]).then(() => {
-        // Ocultando o indicador de carregamento após a conclusão das chamadas assíncronas
-        loaderContainer.style.display = "none";
-        content.style.pointerEvents = "auto"; // Ativa interação com o conteúdo
-    });
+    carregarPiadas();
+    carregarPiadasRanking(loaderContainer,content);
+ 
+    
 }
 
-function carregarPiadas(callback)
+function carregarPiadas()
 {
 
   
@@ -184,7 +174,7 @@ function carregarPiadas(callback)
                             <p class="reset-texto">${piada.usuario.nome}</p>
                         </div>
                         <div class="curtidas-piada">
-                            <p class="reset-texto">${piada.ranking} curtida(s)</p>
+                            <p class="reset-texto" id="${"piada"+piada.id}">${piada.ranking} curtida(s)</p>
                         </div>
                         
                     </div>
@@ -210,7 +200,7 @@ function carregarPiadas(callback)
                             <p class="reset-texto">${piada.usuario.nome}</p>
                         </div>
                         <div class="curtidas-piada">
-                            <p class="reset-texto">${piada.ranking} curtida(s)</p>
+                            <p class="reset-texto" id="${"piada"+piada.id}">${piada.ranking} curtida(s)</p>
                         </div>
                         
                     </div>
@@ -219,12 +209,12 @@ function carregarPiadas(callback)
                     }
                }
            body.innerHTML = piadas;
+
            }    
            )
     .catch(err => alert(err.message)) 
-    if (callback) {
-        callback();
-    }
+
+   
 }
 
 
@@ -237,7 +227,7 @@ function marcarPraCurtida(piada_id)
         if(JSON.parse(result)==true)
             document.getElementById("curtida").setAttribute("onclick","curtir("+piada_id+")");
         else
-            window.location.href = "http://localhost:8080";
+            window.location.href = window.location.protocol + "//" + window.location.host;
 
      })
     .catch(err=> console.error(err));
@@ -250,7 +240,22 @@ function curtir(piada_id)
     const URL_TO_FETCH = '/apis/dar-curtida?id='+piada_id;
     
     fetch(URL_TO_FETCH, {method: 'get'})
-     .then(response=>{ if(response.ok) window.location.reload();  else throw Error("erro") })
+     .then(response=>{ if(response.ok) {
+            var piada = document.getElementById("piada"+piada_id);
+            var ranking = document.getElementById("rank"+piada_id);
+            var valor;
+            if(piada!=null){
+                valor = piada.innerHTML.split(' ')[0];
+                valor = parseInt(valor)+1;
+                piada.innerHTML = valor+" curtida(s)";
+            }
+            if(ranking!=null){
+                valor = ranking.innerHTML.split(' ')[0];
+                valor = parseInt(valor)+1;
+                ranking.innerHTML = valor+" curtida(s)";
+            }
+            
+     }  else alert("Ocorreu um erro ao tentar curtir a piada, por favor tente novamente mais tarde!") })
      .catch(err => alert(err.message)) 
     
 }
@@ -291,7 +296,7 @@ function buscar()
                             <p class="reset-texto">${piada.usuario.nome}</p>
                         </div>
                         <div class="curtidas-piada">
-                            <p class="reset-texto">${piada.ranking} curtida(s)</p>
+                            <p class="reset-texto" id="${"piada"+piada.id}">${piada.ranking} curtida(s)</p>
                         </div>
                         
                     </div>
@@ -317,7 +322,7 @@ function buscar()
                             <p class="reset-texto">${piada.usuario.nome}</p>
                         </div>
                         <div class="curtidas-piada">
-                            <p class="reset-texto">${piada.ranking} curtida(s)</p>
+                            <p class="reset-texto" id="${"piada"+piada.id}">${piada.ranking} curtida(s)</p>
                         </div>
                         
                     </div>
@@ -565,7 +570,7 @@ function compare2(a,b) {
     return 0;
   }
 
-function carregarPiadasRanking(callback)
+function carregarPiadasRanking(loaderContainer,content)
 {
     const url = 'apis/listar-todas-piadas';
     let count = 0;
@@ -601,7 +606,7 @@ function carregarPiadasRanking(callback)
                             <p class="reset-texto">${piada.usuario.nome}</p>
                         </div>
                         <div class="curtidas-piada">
-                            <p class="reset-texto">${piada.ranking} curtida(s)</p>
+                            <p class="reset-texto" id="${"rank"+piada.id}">${piada.ranking} curtida(s)</p>
                         </div>
                         
                     </div>
@@ -627,7 +632,7 @@ function carregarPiadasRanking(callback)
                             <p class="reset-texto">${piada.usuario.nome}</p>
                         </div>
                         <div class="curtidas-piada">
-                            <p class="reset-texto">${piada.ranking} curtida(s)</p>
+                            <p class="reset-texto" id="${"rank"+piada.id}">${piada.ranking} curtida(s)</p>
                         </div>
                         
                     </div>
@@ -636,12 +641,12 @@ function carregarPiadasRanking(callback)
                     }
                }
            body.innerHTML = piadas;
+           loaderContainer.style.display = "none";
+           content.style.pointerEvents = "auto";
            }    
            )
     .catch(err => alert(err.message)) 
-    if (callback) {
-        callback();
-    }
+ 
 }
 
 
