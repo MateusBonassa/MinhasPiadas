@@ -520,11 +520,12 @@ function validarDadosCT() {
                       }
                  }
              body.innerHTML = piadas;
+             loaderContainer.style.display = "none";
+             content.style.pointerEvents = "auto";
              }    
              )
       .catch(err => alert(err.message)) 
-      loaderContainer.style.display = "none";
-    content.style.pointerEvents = "auto";
+    
   }
   
 function nivelAcessoCat()

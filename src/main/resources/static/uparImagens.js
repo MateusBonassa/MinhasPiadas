@@ -24,12 +24,13 @@ const firebaseConfig = {
   const uploadImage = ()=>{
     const loaderContainer = document.getElementById("loaderContainer");
     const content = document.getElementById("modalPiImg");
-
+    const btEnviarImg = document.getElementById("btEnviarImg");
     if(validarDadosCadPiadaImg())
     {
       
       loaderContainer.style.display = "flex";
       content.style.pointerEvents = "none"; // Desativa interação com o conteúdo
+      btEnviarImg.disabled = true;
       var file = document.getElementById("imagem").files[0];
       const dataAtual = new Date();
       const file_name = `${dataAtual.getSeconds()}_${dataAtual.getMinutes()}_${dataAtual.getHours()}_${dataAtual.getDate()}_${dataAtual.getMonth() + 1}_${dataAtual.getFullYear()}`+file.name;
@@ -55,12 +56,12 @@ const firebaseConfig = {
               .getDownloadURL()
               .then((url) => {
                 //alert(url);
-                fazerRequisicao(url,file_name);
+                fazerRequisicao(url,file_name,loaderContainer,content,btEnviarImg);
+                
               });
           }
         );
-        loaderContainer.style.display = "none";
-        content.style.pointerEvents = "auto";
+      
 
     }
     
@@ -71,6 +72,11 @@ const firebaseConfig = {
   }
 
 const deletar =(id,img) =>{
+  const loaderContainer = document.getElementById("loaderContainer");
+  const content = document.getElementById("modal-deletar");
+  document.getElementById("deletar").disabled = true;
+  loaderContainer.style.display = "flex";
+  content.style.pointerEvents = "none";
   const URL_TO_FETCH = '/apis/deletar-piada?Id='+id;
   fetch(URL_TO_FETCH, {method: 'get'})
    .then(response=>{ 
@@ -78,7 +84,7 @@ const deletar =(id,img) =>{
     if(response.ok) 
     {
       if(img!="0") {
-        apagarNoFirebase(img);
+        apagarNoFirebase(img,loaderContainer,content);
       }
       else
         window.location.reload();
@@ -88,11 +94,14 @@ const deletar =(id,img) =>{
   
 }
 
-function apagarNoFirebase(img){
+function apagarNoFirebase(img,loaderContainer,content){
+ 
   const storageRef = storage.ref();
   const fileRef = storageRef.child('images/'+img);
   fileRef.delete()
   .then(() => {
+    loaderContainer.style.display = "none";
+    content.style.pointerEvents = "auto";
     alert('Piada excluída com sucesso!');
     window.location.reload();
   })
@@ -102,7 +111,7 @@ function apagarNoFirebase(img){
   });
 }
 
-function fazerRequisicao(urlImg,nome) {
+function fazerRequisicao(urlImg,nome,loaderContainer,content) {
     const URL_TO_FETCH = '/apis/cadastrar-piada-img';
     const formulario = document.getElementById("cadPiadaImg");
     const data = new URLSearchParams(new FormData(formulario));
@@ -118,11 +127,18 @@ function fazerRequisicao(urlImg,nome) {
         body: data
     })
     .then(response => {
+      
         if(response.ok) {
+            loaderContainer.style.display = "none";
+            content.style.pointerEvents = "auto";
+            btEnviarImg.disabled = false;
             alert("Sucesso");
             window.location.reload();
         }
         else{
+          loaderContainer.style.display = "none";
+          content.style.pointerEvents = "auto";
+          btEnviarImg.disabled = false;
           alert("Ocorreu um erro na requisição! Tente Novamente!");
         }
     })
